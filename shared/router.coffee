@@ -2,32 +2,34 @@ Router.map ->
 
   @route "entrySignIn",
     path: "/sign-in"
-    before: ->
+    # tgtg
+    onBeforeAction: ->
       Session.set('entryError', undefined)
       Session.set('buttonText', 'in')
 
   @route "entrySignUp",
     path: "/sign-up"
-    before: ->
+    onBeforeAction: ->
       Session.set('entryError', undefined)
       Session.set('buttonText', 'up')
 
   @route "entryForgotPassword",
     path: "/forgot-password"
-    before: ->
+    onBeforeAction: ->
       Session.set('entryError', undefined)
 
   @route 'entrySignOut',
     path: '/sign-out'
-    before: ->
+    template: 'home'
+    onBeforeAction: ->
       Session.set('entryError', undefined)
       if AccountsEntry.settings.homeRoute
         Meteor.logout () ->
-          Router.go AccountsEntry.settings.homeRoute
+          # Router.go AccountsEntry.settings.homeRoute
       @stop()
 
   @route 'entryResetPassword',
     path: 'reset-password/:resetToken'
-    before: ->
+    onBeforeAction: ->
       Session.set('entryError', undefined)
       Session.set('resetToken', @params.resetToken)

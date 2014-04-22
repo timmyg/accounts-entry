@@ -120,6 +120,8 @@ Template.entrySignUp.events
 
 
     Meteor.call 'entryValidateSignupCode', signupCode, (err, valid) ->
+      if err
+        console.log "err"
       if valid
         newUserData =
           username: username

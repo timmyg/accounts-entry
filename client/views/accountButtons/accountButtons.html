@@ -1,31 +1,52 @@
 <template name="entryAccountButtons">
+  <!-- tgtg -->
   {{#if currentUser}}
 
-    {{#if profileUrl}}
-      {{#wrapLinksLi}}
-        <a class='profileLink' href='{{profileUrl}}'>{{{beforeSignedInAs}}}{{signedInAs}}</a>
-      {{/wrapLinksLi}}
-    {{else}}
-      {{#wrapLinksLi}}
-        <p class="navbar-text">{{{beforeSignedInAs}}}{{signedInAs}}</p>
-      {{/wrapLinksLi}}
-    {{/if}}
+    <!-- <li class="pull-left"> -->
+     
+    <!-- </li> -->
+    <li class="pull-left">
 
-    {{#wrapLinksLi}}
-      <a href="/sign-out">{{{beforeSignOut}}}{{i18n "signOut"}}</a>
-    {{/wrapLinksLi}}
-  {{else}}
+      <!--NON MOBILE-->
+      <div class="hidden-xs">
+        <button type="button" class="btn btn-default dropdown-toggle no-border p0 profileButton" style="" data-toggle="dropdown">
+          <!-- {{signedInAs}} -->
+           <img class="img-rounded" style="height: 30px;width: 30px;" src="{{currentUser.profile.images.pic_square}}"/> 
+           <span class="p5">{{myFirstName}}</span>
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+          <li><a href="/me">My Account</a></li>
+          <li><a href="/sign-out">Sign Out</a></li>
+          {{#if isCertifiedBuyer}}
+            <li class="divider"></li>
+            <li><a href="/sell-it-now">Sell It Now</a></li>
+          {{/if}}
+          {{#if isAdmin}}
+              <li class="divider"></li>
+              <!-- <li class="text-center"><b>Admin</b></li> -->
+              <li><a href="/admin/statuses">Statuses</a></li>
+              <li><a href="/admin/create-device">Devices</a></li>
+              <li><a href="/admin/invite">Invites</a></li>
+          {{/if}}
+        </ul>
+      </div>
 
-    {{#wrapLinksLi}}
-      <a href="/sign-in">{{{beforeSignIn}}}{{i18n "signIn"}}</a>
-    {{/wrapLinksLi}}
+      <!--MOBILE-->
+        <div class="visible-xs">
+          <img class="img-rounded" style="height: 30px;width: 30px;" src="{{currentUser.profile.images.pic_square}}"/> 
+          <select onChange="window.location.href=this.value" class="styled-select">
+            <option value="/me">{{myFirstName}}</option>
+            <option value="/me">My Account</option>
+            <option value="/sign-out">Sign Out</option>
+            {{#if isAdmin}}
+            <option value="/admin/statuses">Statuses</option>
+            <option value="/admin/create-device">Devices</option>
+            <option value="/admin/invite">Invites</option>
+            {{/if}}
+          </select>
+        </div>
 
-    {{#unless wrapLinks}}
-      <span>or</span>
-    {{/unless}}
-
-    {{#wrapLinksLi}}
-      <a href="{{entrySignUp}}">{{{beforeSignUp}}}{{i18n "signUp"}}</a>
-    {{/wrapLinksLi}}
+    </li>
   {{/if}}
 </template>

@@ -22,13 +22,16 @@ Template.entrySocial.events
           Router.go Session.get('fromWhere')
           Session.set('fromWhere', undefined)
         else
-          Router.go AccountsEntry.settings.dashboardRoute
+          Router.go AccountsEntry.settings.homeRoute
       else if (err instanceof Accounts.LoginCancelledError)
         # do nothing
       else if (err instanceof ServiceConfiguration.ConfigError)
         Accounts._loginButtonsSession.configureService(serviceName)
+      # tgtg
       else
-        Accounts._loginButtonsSession.errorMessage(err.reason || i18n("error.unknown"))
+        Alerts.add err.details, "warning" 
+        return
+        # Accounts._loginButtonsSession.errorMessage(err.reason || i18n("error.unknown"))
     loginWithService = Meteor["loginWith" + capitalize(serviceName)]
     options = {}
 
