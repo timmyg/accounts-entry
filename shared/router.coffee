@@ -27,17 +27,20 @@ Router.map ->
         Meteor.logout () ->
           # Router.go AccountsEntry.settings.homeRoute
       @stop()
-    onAfterAction: ->
-      console.log "tg"
-      checkHeaderColor this
-      bindTestimonialClicker()
-    onStop: ->
-      headerNormalize()
-      unbindTestimonialClicker()
-    waitOn: ->
-      Meteor.subscribe "RecentlySold"
-      Meteor.subscribe "Testimonials"
-      Meteor.subscribe "DeviceTypes"
+      Router.go("home")
+    # onRun: ->
+    #   Router.go("home")
+    # onAfterAction: ->
+    #   console.log "tg"
+    #   checkHeaderColor this
+    #   bindTestimonialClicker()
+    # onStop: ->
+    #   headerNormalize()
+    # #   unbindTestimonialClicker()
+    # waitOn: ->
+    #   Meteor.subscribe "RecentlySold"
+    #   Meteor.subscribe "Testimonials"
+    #   Meteor.subscribe "DeviceTypes"
 
   @route 'entryResetPassword',
     path: 'reset-password/:resetToken'
