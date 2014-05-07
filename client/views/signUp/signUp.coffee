@@ -102,6 +102,7 @@ Template.entrySignUp.events
     profile.first_name = businessname
     profile.contact_first_name = firstname
     profile.business_name = businessname
+    profile.business = true
     # profile.lastname = lastname
     # profile.zip = zip
     # profile.name = "#{firstname} #{lastname}"
